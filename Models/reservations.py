@@ -1,3 +1,5 @@
+from datetime import datetime
+
 class Reservation:
     def __init__(self, id_reservation: str, id_client: str, id_vehicule: str,
                  date_depart: str, date_retour: str, forfait_km: int,
@@ -10,7 +12,18 @@ class Reservation:
         self.forfait_km = forfait_km
         self.cout_journalier = cout_journalier
         self.prix_km_supp = prix_km_supp
-        self.cout_estime = 0.0  # sera calculé plus tard
+        self.cout_estime = 0.0
+
+        self._calculer_cout_estime()
+
+    def _calculer_cout_estime(self):
+        """Calcule le coût estimé de la réservation"""
+        date_dep = datetime.strptime(self.date_depart, "%Y-%m-%d")
+        date_ret = datetime.strptime(self.date_retour, "%Y-%m-%d")
+        nb_jours = (date_ret - date_dep).days
+        nb_jours = max(1, nb_jours) 
+        self.cout_estime = self.cout_journalier * nb_jours
+
 
     def __str__(self):
         return (f"Réservation {self.id_reservation} | Client: {self.id_client} "
@@ -44,3 +57,18 @@ class Reservation:
             cout_journalier=data.get("cout_journalier", 0.0),
             prix_km_supp=data.get("prix_km_supp", 0.0)
         )
+
+
+if __name__ == "__main__":
+    res = Reservation(
+        id_reservation="R0001",
+        id_client="C001",
+        id_vehicule="V002",
+        date_depart="2026-06-10",
+        date_retour="2026-06-12",
+        forfait_km=200,
+        cout_journalier=50.0,
+        prix_km_supp=0.20
+    )
+
+    print(res) 
