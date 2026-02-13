@@ -1,4 +1,4 @@
-from ui import afficher_clients, afficher_vehicules, afficher_menu, demander_choix_menu
+from ui import afficher_menu, demander_choix_menu, afficher_clients, afficher_vehicules, demander_reservation
 
 def main():
     while True:
@@ -9,6 +9,8 @@ def main():
             afficher_clients()
         elif choix == "2":
             afficher_vehicules()
+        elif choix == "3":
+            demander_reservation()
         elif choix == "7":
             print("Au revoir !")
             break
