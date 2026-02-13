@@ -57,18 +57,3 @@ class Reservation:
             cout_journalier=data.get("cout_journalier", 0.0),
             prix_km_supp=data.get("prix_km_supp", 0.0)
         )
-
-
-if __name__ == "__main__":
-    res = Reservation(
-        id_reservation="R0001",
-        id_client="C001",
-        id_vehicule="V002",
-        date_depart="2026-06-10",
-        date_retour="2026-06-12",
-        forfait_km=200,
-        cout_journalier=50.0,
-        prix_km_supp=0.20
-    )
-
-    print(res) 
